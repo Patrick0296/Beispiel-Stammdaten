@@ -32,7 +32,7 @@ print(f"Anzahl WEA auf See: {len(wind_off)}")
 # Plotten der Anlagen, Punktgröße spiegelt Nettoleistung wider
 fig, ax = plt.subplots(figsize=(10, 15))
 europe_map.plot(facecolor="white", edgecolor="black", ax=ax)
-wind_on.plot(facecolor="red", markersize=wind_on.ENH_Nettonennleistung / 100, ax=ax)
+wind_on.plot(facecolor="blue", markersize=wind_on.ENH_Nettonennleistung / 100, ax=ax)
 wind_off.plot(facecolor="blue", markersize=wind_off.ENH_Nettonennleistung / 100, ax=ax)
 plt.show()
 
