@@ -6,16 +6,13 @@ from matplotlib import pyplot as plt
 # Einlesen der Regionen Europas auf NUTS3 level
 europe_map = gpd.read_file(r"NUTS_BN_01M_2021_3035\NUTS_BN_01M_2021_3035.shp")
 
-#Shapefile anzeigen lassen
-#europe_map.plot(Color='red') #plotten (berechnen) und attribute festlegen
-#plt.show() #anzeigen als Bild
 # Einlesen der Stammdaten als Pandas DF aus einer csv
-wind = pd.read_csv("raw_wts_red.csv")
+wind_sd = pd.read_csv("raw_wts_red.csv")
 
 # Umwandlung des DF in ein GeoDataFrame (Einführung der geometry column)
 wind_sd = gpd.GeoDataFrame(
-    wind,
-    geometry=gpd.points_from_xy(wind.ENH_Laengengrad, wind.ENH_Breitengrad),
+    wind_sd,
+    geometry=gpd.points_from_xy(wind_sd.ENH_Laengengrad, wind_sd.ENH_Breitengrad),
 )
 
 # Definieren, welches EPSG Format die eingelesenen Daten haben
@@ -35,9 +32,9 @@ print(f"Anzahl WEA auf See: {len(wind_off)}")
 # Plotten der Anlagen, Punktgröße spiegelt Nettoleistung wider
 fig, ax = plt.subplots(figsize=(10, 15))
 europe_map.plot(facecolor="white", edgecolor="black", ax=ax)
-wind_on.plot(facecolor="green", markersize=wind_on.ENH_Nettonennleistung / 100, ax=ax)
+wind_on.plot(facecolor="red", markersize=wind_on.ENH_Nettonennleistung / 100, ax=ax)
 wind_off.plot(facecolor="blue", markersize=wind_off.ENH_Nettonennleistung / 100, ax=ax)
 plt.show()
 
 # Export des wind Geodataframes als Shapefile
-wind_sd.to_file("export\Wind_Stammdaten_3035.shp")
+#wind_sd.to_file("export\Wind_Stammdaten_3035.shp")
